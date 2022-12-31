@@ -1,0 +1,18 @@
+type Medicine {
+	id: ID!
+	name: String!
+	active: String!
+}
+
+type Query {
+	medicines: [Medicine!]!
+}
+
+input NewMedicine {
+	name: String!
+	active: String!
+}
+
+type Mutation {
+	createMedicine(input: NewMedicine!): Medicine!
+}
