@@ -8,6 +8,8 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/ChaboCode/bacteriofago/graph"
+	"github.com/99designs/gqlgen/graphql/handler/transport"
+
 )
 
 const defaultPort = "8080"
@@ -19,6 +21,7 @@ func main() {
 	}
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	srv.AddTransport(transport.POST{})
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
